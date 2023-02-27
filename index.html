@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Red Hat Display", sans-serif;
+      background-color: blanchedalmond;
+      width: 1200px;
+      color: blue;
+    }
+    img {
+      height: 450px;
+      width: 600px;
+      position: absolute;
+      right: 100px;
+      top: 100px;
+    }
+
+    h1 {
+      display: block;
+      /* position: absolute; */
+      margin-left: 300px;
+      font-size: 60px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <button id="button">Generate PDF</button>
+      <div class="card" id="makepdf">
+        <a href="javascript:generatePDF()" id="download_button"
+          >Click to download</a
+        >
+        <h1>The 12th Degree</h1>
+        <img src="davyjones.jpg" alt="" />
+        <h2>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+          doloremque saepe nostrum in delectus obcaecati qui mollitia sed est
+          sunt.
+        </h2>
+        <h3>ABOUT THE UNIT</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat est
+          quibusdam modi dolore. Qui delectus quia libero. Esse accusamus est
+          nam voluptatem quam! Eaque, reiciendis.
+        </p>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit nulla
+          minus maiores architecto velit optio harum animi labore itaque nemo a,
+          laudantium quasi. Eligendi, dolor?
+        </p>
+
+        <h3>ABOUT THE 12 DEGREES</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
+          architecto reiciendis! Ipsa vitae molestiae illo. Vel vitae velit ut a
+          molestiae fugit animi tempora labore?
+        </p>
+        <h3>GRABBING THE MOMENT</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+          officiis quisquam dolores cupiditate ipsam consectetur quam adipisci
+          eos. Quam, nostrum! Obcaecati laborum ex sit perspiciatis?
+        </p>
+        <h3>CURRENT PROGRAMS</h3>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          Necessitatibus possimus dolor aut, officiis deserunt similique
+          delectus error accusamus nemo corrupti, soluta aliquam nesciunt
+          nostrum magni?
+        </p>
+        <h3>BUDGET FOR 2023</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis
+          saepe quisquam dolorem facilis quia ad eos corrupti quam eum ab,
+          voluptatum ipsa provident est maiores.
+        </p>
+      </div>
+    </div>
+  </body>
+  <script>
+    async function generatePDF() {
+      document.getElementById("download_button").innerHTML =
+        "Downloading, chill out, braaa";
+
+      //downloading code
+      var PDF = document.getElementById("makepdf");
+      var doc = new jsPDF("l", "pt");
+
+      await html2canvas(PDF, {
+        allowTaint: true,
+        useCORS: true,
+        width: 1300,
+      }).then((canvas) => {
+        //convert canvas to PNG
+        doc.addImage(canvas.toDataURL("image/PNG"), "PNG", 5, 5);
+      });
+
+      doc.save("document.pdf");
+
+      document.getElementById("download_button").innerHTML =
+        "Click to download";
+    }
+  </script>
+</html>
